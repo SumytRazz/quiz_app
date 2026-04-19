@@ -25,15 +25,30 @@ const questionElement = document.getElementById("question");
 const optionButtons = document.querySelectorAll(".option");
 
 let currentQuestionIndex = 0;
+let selectedAnswer = null;
 
+// Load question
 function loadQuestion() {
     let currentQuestion = questions[currentQuestionIndex];
 
-    console.log(currentQuestion);
     questionElement.textContent = currentQuestion.question;
+
     optionButtons.forEach((button, index) => {
         button.textContent = currentQuestion.options[index];
+        button.style.backgroundColor = "#eee";
     });
+
+    selectedAnswer = null;
 }
+
+optionButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        selectedAnswer = button.textContent;
+        optionButtons.forEach(btn => btn.style.backgroundColor = "#eee");
+        button.style.backgroundColor = "lightgreen";
+
+        console.log("Selected:", selectedAnswer);
+    });
+});
 
 loadQuestion();
